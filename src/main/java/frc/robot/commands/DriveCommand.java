@@ -9,14 +9,14 @@ import java.util.function.DoubleSupplier;
 public class DriveCommand extends CommandBase {
     private final DriveSubsystem m_driveSubsystem;
 
-    private Double m_translationXSupplier = 0.0;
-    private Double m_translationYSupplier = 0.0;
-    private Double m_rotationSupplier = 0.0;
+    private double m_translationXSupplier = 0.0;
+    private double m_translationYSupplier = 0.0;
+    private double m_rotationSupplier = 0.0;
 
     public DriveCommand(DriveSubsystem driveSubsystem,
-                               Double translationXSupplier,
-                               Double translationYSupplier,
-                               Double rotationSupplier) {
+                               double translationXSupplier,
+                               double translationYSupplier,
+                               double rotationSupplier) {
         this.m_driveSubsystem = driveSubsystem;
         this.m_translationXSupplier = translationXSupplier;
         this.m_translationYSupplier = translationYSupplier;

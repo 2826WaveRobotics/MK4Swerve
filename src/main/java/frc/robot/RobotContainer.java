@@ -43,7 +43,7 @@ public class RobotContainer {
     public final DriveSubsystem m_driveSubsystem = new DriveSubsystem();
 
 // Joysticks
-private final XboxController m_driver = new XboxController(0);
+public final XboxController m_driver = new XboxController(0);
 
   // A chooser for autonomous commands
   SendableChooser<Command> m_chooser = new SendableChooser<>();
@@ -128,7 +128,7 @@ public XboxController getDriverController() {
     }
   }
 
-  private static double modifyAxis(double value) {
+  public static double modifyAxis(double value) {
     // Deadband
     value = deadband(value, 0.05);
 

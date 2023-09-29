@@ -16,8 +16,11 @@ import edu.wpi.first.hal.FRCNetComm.tInstances;
 import edu.wpi.first.hal.FRCNetComm.tResourceType;
 import edu.wpi.first.hal.HAL;
 import edu.wpi.first.wpilibj.TimedRobot;
+import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
+import edu.wpi.first.math.kinematics.ChassisSpeeds;
+import frc.robot.subsystems.DriveSubsystem;
 
 /**
  * The VM is configured to automatically run this class, and to call the
@@ -31,6 +34,8 @@ public class Robot extends TimedRobot {
     private Command m_autonomousCommand;
 
     private RobotContainer m_robotContainer;
+    private DriveSubsystem m_driveSubsystem;
+    private XboxController m_driverController;
 
     /**
      * This function is run when the robot is first started up and should be
@@ -41,6 +46,8 @@ public class Robot extends TimedRobot {
         // Instantiate our RobotContainer.  This will perform all our button bindings, and put our
         // autonomous chooser on the dashboard.
         m_robotContainer = RobotContainer.getInstance();
+        m_driveSubsystem = m_robotContainer.m_driveSubsystem;
+        m_driverController = m_robotContainer.m_driver;
         HAL.report(tResourceType.kResourceType_Framework, tInstances.kFramework_RobotBuilder);
     }
 
@@ -108,7 +115,19 @@ public class Robot extends TimedRobot {
      */
     @Override
     public void teleopPeriodic() {
-        
+        m_driveSubsystem.drive(
+
+        // m_driverController.getLeftY())
+        // m_driverController.getLeftX())
+        // m_driverController.getRightX()
+
+                ChassisSpeeds.fromFieldRelativeSpeeds(
+                        -RobotContainer.modifyAxis(0.5) * DriveSubsystem.MAX_VELOCITY_METERS_PER_SECOND,
+                        -RobotContainer.modifyAxis(0) * DriveSubsystem.MAX_VELOCITY_METERS_PER_SECOND,
+                        -RobotContainer.modifyAxis(0) * DriveSubsystem.MAX_ANGULAR_VELOCITY_RADIANS_PER_SECOND,
+                        m_driveSubsystem.getGyroscopeRotation()
+                )
+        );
     }
 
     @Override
